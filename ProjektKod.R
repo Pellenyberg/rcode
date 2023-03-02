@@ -29,5 +29,3 @@ plot(x=px_data_frame$datum,
 
 # Cite the data as 
 #pxweb_cite(px_data)
-
-aaa
