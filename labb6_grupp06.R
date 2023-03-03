@@ -2,10 +2,6 @@ Namn<-c("Jakob EKlund", "Pelle Nyberg")
 LiuId<-c("jakek854", "pelny705")
 Grupp<-"grupp06"
 
-library(markmyassignment)
-lab_path <-
-"https://raw.githubusercontent.com/STIMALiU/KursRprgm2/master/Labs/Tests/d6.yml"
-suppressWarnings(set_assignment(lab_path))
 
 #' @title classroom()
 #'
@@ -39,8 +35,8 @@ suppressWarnings(set_assignment(lab_path))
 
 
 classroom <- function(seats , whiteboards) {
-  if (seats < 1)  stop ("Ett klassrum ska inte ha mindre än 1 stol")
-  if (whiteboards < 0) {
+  if (seats <  1)  stop ("Ett klassrum ska inte ha mindre än 1 stol")
+  if (whiteboards <  0) {
     stop ("Ett klassrum kan ju inte ha mindre än 0 whiteboards")
   }
   classroomInfo <- list(seats = seats,whiteboards = whiteboards)
@@ -49,21 +45,21 @@ classroom <- function(seats , whiteboards) {
 }
 
 
-print.classroom <- function(x){
+print.classroom <- function(x) {
   
-  if (x$seats[1] <=10 && x$whiteboards[1] == 0 ){
+  if (x$seats[1] <=10 && x$whiteboards[1] == 0 ) {
     cat("A group room for", x$seats[1], "students with no whiteboards")
   } else if (x$seats[1] <=10) {
     cat("A group room for", x$seats[1], "students with", x$whiteboards[1], "whiteboards")
   } 
-  if ((x$seats[1] < 51 && x$seats[1] > 10) && x$whiteboards[1] == 0){
+  if ((x$seats[1] < 51 && x$seats[1] > 10) && x$whiteboards[1] == 0) {
     cat("A classroom for", x$seats[1], "students with no whiteboards")
-  } else if (x$seats[1] < 51 && x$seats[1] > 10){
+  } else if (x$seats[1] < 51 && x$seats[1] > 10) {
     cat("A classroom for", x$seats[1], "students with", x$whiteboards[1], "whiteboards")
   } 
-  if (x$seats[1] > 50 && x$whiteboards[1] == 0){
+  if (x$seats[1] > 50 && x$whiteboards[1] == 0) {
     cat("A lecture hall for", x$seats[1], "students with no whiteboards")
-  } else if (x$seats[1] > 50){
+  } else if (x$seats[1] > 50) {
     cat("A lecture hall for", x$seats[1], "students with", x$whiteboards[1], "whiteboards")
   }
   cat("\n")
@@ -94,7 +90,7 @@ print.classroom <- function(x){
 #' 
 #'
 
-ive_blood <- function(lasttime=today(), holiday="hemma", sex, type_of_travel) {
+give_blood <- function(lasttime=today(), holiday="hemma", sex, type_of_travel) {
   if(holiday=="hemma") { 
     type_of_travel <- NULL
     extraTime <- lasttime
