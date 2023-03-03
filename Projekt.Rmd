@@ -24,12 +24,14 @@ KPI har konverterats så att den börjar med basen 100 där valt intervall börj
 
 # Kommundata
 
+```{r tabelldata, echo=FALSE, results="asis"}
+library(knitr)
+data(mtcars)
+knitr::kable(head(mtcars), caption="Bilar", padding=2, format="pipe")
 
 
-
-
-
-
+```
+En tabell över bilar
 
 # Tidsseriedata
 ```{r kpiPlot, echo=FALSE}
