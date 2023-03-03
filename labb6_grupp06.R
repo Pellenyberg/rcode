@@ -2,6 +2,10 @@ Namn<-c("Jakob EKlund", "Pelle Nyberg")
 LiuId<-c("jakek854", "pelny705")
 Grupp<-"grupp06"
 
+library(markmyassignment)
+lab_path <-
+"https://raw.githubusercontent.com/STIMALiU/KursRprgm2/master/Labs/Tests/d6.yml"
+suppressWarnings(set_assignment(lab_path))
 
 #' @title classroom()
 #'
