@@ -1,12 +1,32 @@
 ---
-title: "Projekt: del 1"
-author: "Pelle Nyberg & Jakob Eklund"
-date: "2023-03-02"
+title: "Projekt: 732G33: del 1"
 output:
   html_document: default
   pdf_document: default
 ---
 
+*Författare:* Jakob Eklund & Pelle Nyberg
+
+*Liu-id:* jakek854 & pelny705
+
+*Grupp:* 06
+
+
+# Introduktion
+
+
+
+
+# Kommundata
+
+
+
+
+
+
+
+
+# Tidsseriedata
 ```{r kpiPlot, echo=FALSE}
 library(pxweb)
 library(lubridate)
