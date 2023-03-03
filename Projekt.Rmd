@@ -137,9 +137,11 @@ pxweb_query_list_moppar <-
 ```
 
 ```{r data.combine, echo=FALSE}
-min_lista <- list(dataframemallen_befolkning)
+min_lista <- list(Region=px_data_frame_befolkning$region, Medelålder=px_data_frame_age$`Befolkningens medelålder`, Utländska=antalUtland/px_data_frame_befolkning$Folkmängd, Inkomst=px_data_frame_income$Medelvärde, "Andel moppar"=iTrafik$`Fordon i trafik`/px_data_frame_befolkning$Folkmängd, Befolkning=px_data_frame_befolkning$Folkmängd)
 total_df <- data.frame(min_lista)
-knitr::kable(min_lista)
+total_df <- total_df[-1,]
+setDT(total_df)
+knitr::kable(total_df)
 ```
 # Kommundata
 
