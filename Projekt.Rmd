@@ -55,4 +55,4 @@ plot(x=px_data_frame$datum,
 # Skapar plot med tid på x-axeln och kpi på y.
 ```
 
-En tidsserie över perioden 1 january 2012 till 31 december 2021. Där data hämtas från SCB och perioden har justerats så att basåret är 2012. xddddd
+En tidsserie över perioden 1 january 2012 till 31 december 2021. Där data hämtas från SCB och perioden har justerats så att basåret är 2012.
