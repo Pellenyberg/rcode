@@ -199,7 +199,7 @@ highest.all <- c(highest.age, highest.inkomst, highest.utland, highest.moppar, h
 
 ```{r tabl2.combine, echo=FALSE}
 names_table2 <- c("Medelålder", "Medelinkomst", "Utländska", "Moppar", "Befolkning")
-list_table2 <- list(" hej"=names_table2,Medelvärde=medel.all, Median=median.all
+list_table2 <- list(" "=names_table2,Medelvärde=medel.all, Median=median.all
                     , Standardavikelse=standardavikelse.all, Minumum=lowest.all,
                     Maximum=highest.all)
 table2_dataframe<- data.frame(list_table2)
