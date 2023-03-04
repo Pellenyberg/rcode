@@ -247,6 +247,18 @@ Data på medelinkomst för alla kommuner.
 boxplot(total_df$"Utländska.procent",range=0,horizontal=TRUE,xlab="Antal utlandsfödda per 100 invånare",col="blue")
 ```
 Ovan visar en boxplot över antalet utlandsfödda per 100 invånare över samtliga regioner i Sverige
+
+```{r box, echo=FALSE}
+
+boxplot(100*iTrafik$`Fordon i trafik`/px_data_frame_befolkning$Folkmängd, horizontal = TRUE, main="Boxplot andel moppar per 100 invånare", col="blue", outline=FALSE, xlab="Moppar per 100")
+
+```
+
+Ovan illustreras en boxplot på andel moppar i kommunerna per 100 invånare. Vi
+finner här en median strax över 1 moped per 100 invånare. I boxplotten har vi
+tagit beslutet att ignorera outliers då detta annars starkt förvränger figuren.
+
+
 # Tidsseriedata
 ```{r kpiPlot, echo=FALSE}
 
