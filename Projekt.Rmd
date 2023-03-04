@@ -166,8 +166,8 @@ medel.all <- c(medel.age, medel.inkomst, medel.utland, medel.moppar, medel.popul
 ```
 ```{r median, echo=FALSE}
 median.age <- median(total_df$Medelålder)
-median.inkomst <- median(total_df$"Utländska.procent")
-median.utland <- median(total_df$Inkomst)
+median.inkomst <- median(total_df$Inkomst)
+median.utland <- median(total_df$"Utländska.procent")
 median.moppar <- median(total_df$"MopparPer100Personer")
 median.population <- median(total_df$Befolkning)
 median.all <- c(median.age, median.inkomst, median.utland, median.moppar, median.population)
@@ -196,15 +196,17 @@ highest.moppar <- max(total_df$"MopparPer100Personer")
 highest.population <-max(total_df$Befolkning)
 highest.all <- c(highest.age, highest.inkomst, highest.utland, highest.moppar, highest.population)
 ```
+
 ```{r tabl2.combine, echo=FALSE}
 names_table2 <- c("Medelålder", "Medelinkomst", "Utländska", "Moppar", "Befolkning")
-list_table2 <- list(" "=names_table2,Medelvärde=medel.all, Median=median.all
+list_table2 <- list(" hej"=names_table2,Medelvärde=medel.all, Median=median.all
                     , Standardavikelse=standardavikelse.all, Minumum=lowest.all,
                     Maximum=highest.all)
 table2_dataframe<- data.frame(list_table2)
 knitr::kable(table2_dataframe,caption = "Test",digits = 3, format.args = list(big.mark = ",",
   scientific = FALSE))
 ```
+
 ```{r plot, echo=FALSE}
 plot(px_data_frame_income$Medelvärde, 
      100*iTrafik$`Fordon i trafik`/px_data_frame_befolkning$Folkmängd,
