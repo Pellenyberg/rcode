@@ -1,8 +1,8 @@
 ---
 title: "Projekt: 732G33: del 1"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
 *Författare:* Jakob Eklund & Pelle Nyberg
@@ -146,7 +146,7 @@ setDT(total_df)
 ```
 # Kommundata
 ```{r kommuntabell, echo=FALSE}
-knitr::kable(total_df[150:154,], caption="Table 1", digits = 3, format.args = list(big.mark = ",",
+knitr::kable(total_df[150:154,], caption="Tabell över variabler", digits = 3, format.args = list(big.mark = ",",
   scientific = FALSE))
 ```
 
@@ -201,14 +201,15 @@ list_table2 <- list(" "=names_table2,Medelvärde=medel.all, Median=median.all
                     , Standardavikelse=standardavikelse.all, Minumum=lowest.all,
                     Maximum=highest.all)
 table2_dataframe<- data.frame(list_table2)
-knitr::kable(table2_dataframe,caption = "Table 2",digits = 3, format.args = list(big.mark = ",",
+knitr::kable(table2_dataframe,caption = "Tabell över statistiska mått",digits = 3, format.args = list(big.mark = ",",
   scientific = FALSE))
 ```
 Ovan visar en tabell våra 4 variabler samt befolknings-variabeln.
 Tabllen visar dessa varibler samt vad medelvärdet,medianen, standardavikelsen,
 minsta och största obeservationen av samtliga variabler. 
-I denna tabell till skillnad från den ovanför så är representerar variablerna Sveriges samtliga regioner, 
-inte enbart våra utvalda kommuner
+I denna tabell till skillnad från den ovanför så är representerar variablerna Sveriges samtliga regioner, inte enbart våra utvalda kommuner
+
+
 ```{r plot, echo=FALSE}
 plot(px_data_frame_income$Medelvärde, 
      100*iTrafik$`Fordon i trafik`/px_data_frame_befolkning$Folkmängd,
@@ -220,8 +221,7 @@ plot(px_data_frame_income$Medelvärde,
 ```
 
 
-En scatter plot mellan variablerna medelinkomst och antal moppar per 100 personer.
-Det tycks inte föreligga någon signifikant korrelation mellan variablerna. 
+Ovan presenteras en scatter plot mellan variablerna medelinkomst och antal moppar per 100 personer.Det tycks inte föreligga någon signifikant korrelation mellan variablerna. 
 Kommunen Danderyd utslöts ur plotten då dess medelinkomst låg nästan det dubbla 
 av kommunen med näst högst inkomst.
 
@@ -231,7 +231,7 @@ hist(result_age, main="Medelålder", ylab="Frekvens", xlab="Ålder", breaks=40)
 
 ```
 
-Histogram för medelålder
+Histogram för medelålder.
 
 ```{r income.hist, echo=FALSE}
 
@@ -240,11 +240,11 @@ hist(px_data_frame_income$`Medelvärde,  tkr`, xlim =c(300, 1050), breaks=30, ma
 ```
 
 Data på medelinkomst för alla kommuner. 
-Även här valt att exkludera Danderyd som annars ger ett fult histogram.
+Även här har vi valt att exkludera Danderyd som annars ger ett fult histogram.
 
 
 ```{r utlandBoxplot, echo=FALSE}
-boxplot(total_df$"Utlandsfödda",range=0,horizontal=TRUE,xlab="Antal utlandsfödda per 100 invånare",col="blue")
+boxplot(total_df$"Utlandsfödda",range=0,horizontal=TRUE,xlab="Antal utlandsfödda per 100 invånare",col="blue", main="Boxplot utlandsfödda")
 ```
 
 Ovan visar en boxplot över antalet utlandsfödda per 100 invånare över samtliga regioner i Sverige
