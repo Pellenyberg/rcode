@@ -14,16 +14,14 @@ output:
 
 # Introduktion
 
-<<<<<<< Updated upstream
-I detta arbete har vi använt oss utav tidsseriedata som hämtats från SCB. 
-=======
-I detta arbete hardvi använt oss utav tidsseriedata som hämtats från SCB. 
->>>>>>> Stashed changes
-Den datan vi valt att hämta är konsumentprisindex (KPI) på riksnivå i Sverige.
+För kommunaldata har vi hämtat data för variablerna medelålder, medelinkomst, 
+andel utlandsfödda, andel moppar och även befolkning. 
+För tiddserie har vi hämtat data för konsumentprisindex (KPI) på riksnivå i Sverige.
 Tidsserien är på månadsnivå och innefattar perioden january 2012 till 
 december 2021. Den innefattar en period om tio år och totalt 120 månader. Dessa
 månader har konverterats till ett datumintervall i paketet lubridate. Datan för
 KPI har konverterats så att den börjar med basen 100 där valt intervall börjar.
+All använd data har hämtats från SCB.
 
 ```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
 library(knitr)
@@ -148,7 +146,8 @@ setDT(total_df)
 ```
 # Kommundata
 ```{r kommuntabell, echo=FALSE}
-knitr::kable(total_df[150:154,], caption="Tabell för kommundata")
+knitr::kable(total_df[150:154,], caption="Table 1", digits = 3, format.args = list(big.mark = ",",
+  scientific = FALSE))
 ```
 
 
@@ -202,7 +201,7 @@ list_table2 <- list(" "=names_table2,Medelvärde=medel.all, Median=median.all
                     , Standardavikelse=standardavikelse.all, Minumum=lowest.all,
                     Maximum=highest.all)
 table2_dataframe<- data.frame(list_table2)
-knitr::kable(table2_dataframe,caption = "Test",digits = 3, format.args = list(big.mark = ",",
+knitr::kable(table2_dataframe,caption = "Table 2",digits = 3, format.args = list(big.mark = ",",
   scientific = FALSE))
 ```
 Ovan visar en tabell våra 4 variabler samt befolknings-variabeln.
@@ -232,6 +231,8 @@ hist(result_age, main="Medelålder", ylab="Frekvens", xlab="Ålder", breaks=40)
 
 ```
 
+Histogram för medelålder
+
 ```{r income.hist, echo=FALSE}
 
 hist(px_data_frame_income$`Medelvärde,  tkr`, xlim =c(300, 1050), breaks=30, main="Medelinkomst för kommuner", xlab="Inkomst", ylab="Frekvens")
@@ -247,6 +248,17 @@ boxplot(total_df$"Utlandsfödda",range=0,horizontal=TRUE,xlab="Antal utlandsföd
 ```
 
 Ovan visar en boxplot över antalet utlandsfödda per 100 invånare över samtliga regioner i Sverige
+
+```{r box, echo=FALSE}
+
+boxplot(100*iTrafik$`Fordon i trafik`/px_data_frame_befolkning$Folkmängd, horizontal = TRUE, main="Boxplot andel moppar per 100 invånare", col="blue", outline=FALSE, xlab="Moppar per 100")
+
+```
+
+Ovan illustreras en boxplot på andel moppar i kommunerna per 100 invånare. Vi
+finner här en median strax över 1 moped per 100 invånare. I boxplotten har vi
+tagit beslutet att ignorera outliers då detta annars starkt förvränger figuren.
+
 
 # Tidsseriedata
 ```{r kpiPlot, echo=FALSE}
