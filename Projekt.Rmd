@@ -141,20 +141,68 @@ pxweb_query_list_moppar <-
 ```
 
 ```{r data.combine, echo=FALSE}
-min_lista <- list(Region=px_data_frame_befolkning$region, Medelålder=px_data_frame_age$`Befolkningens medelålder`, "Utländska.procent"=100*antalUtland/px_data_frame_befolkning$Folkmängd, Inkomst=px_data_frame_income$Medelvärde, "MopparPerPerson"=iTrafik$`Fordon i trafik`/px_data_frame_befolkning$Folkmängd, Befolkning=px_data_frame_befolkning$Folkmängd)
+min_lista <- list(Region=px_data_frame_befolkning$region, Medelålder=px_data_frame_age$`Befolkningens medelålder`,  Inkomst=px_data_frame_income$Medelvärde, "Utländska.procent"=100*antalUtland/px_data_frame_befolkning$Folkmängd, "MopparPer100Personer"=100*iTrafik$`Fordon i trafik`/px_data_frame_befolkning$Folkmängd, Befolkning=px_data_frame_befolkning$Folkmängd)
 total_df <- data.frame(min_lista)
 total_df <- total_df[-1,]
 setDT(total_df)
 ```
 # Kommundata
 ```{r kommuntabell, echo=FALSE}
-knitr::kable(head(total_df), caption="Tabell för kommundata")
+knitr::kable(total_df[150:154,], caption="Tabell för kommundata")
 ```
 
 En tabell över olika data på kommunnivå hämtat från SCBs hemsida. Där vi i denna
 tabell väljer att presentera data för sex av de totalt 290 kommuners data. 
 I denna tabell har vi data för medelålder, medellön på årsbasis, 
-
+```{r medel, echo=FALSE}
+medel.age <- mean(total_df$Medelålder)
+medel.utland <- mean(total_df$"Utländska.procent")
+medel.inkomst <- mean(total_df$Inkomst)
+medel.moppar <- mean(total_df$"MopparPer100Personer")
+medel.population <- mean(total_df$Befolkning)
+medel.all <- c(medel.age, medel.inkomst, medel.utland, medel.moppar, medel.population)
+```
+```{r median, echo=FALSE}
+median.age <- median(total_df$Medelålder)
+median.inkomst <- median(total_df$"Utländska.procent")
+median.utland <- median(total_df$Inkomst)
+median.moppar <- median(total_df$"MopparPer100Personer")
+median.population <- median(total_df$Befolkning)
+median.all <- c(median.age, median.inkomst, median.utland, median.moppar, median.population)
+```
+```{r standardavikelse, echo=FALSE}
+standardavikelse.age <- sd(total_df$Medelålder)
+standardavikelse.inkomst <- sd(total_df$Inkomst)
+standardavikelse.utland <- sd(total_df$"Utländska.procent")
+standardavikelse.moppar <- sd(total_df$"MopparPer100Personer")
+standardavikelse.population <-sd(total_df$Befolkning)
+standardavikelse.all <- c(standardavikelse.age, standardavikelse.inkomst, standardavikelse.utland, standardavikelse.moppar, standardavikelse.population)
+```
+```{r minumum, echo=FALSE}
+lowest.age <- min(total_df$Medelålder)
+lowest.inkomst <- min(total_df$Inkomst)
+lowest.utland <- min(total_df$"Utländska.procent")
+lowest.moppar <- min(total_df$"MopparPer100Personer")
+lowest.population <-min(total_df$Befolkning)
+lowest.all <- c(lowest.age, lowest.inkomst, lowest.utland, lowest.moppar, lowest.population)
+```
+```{r maximum, echo=FALSE}
+highest.age <- max(total_df$Medelålder)
+highest.inkomst <- max(total_df$Inkomst)
+highest.utland <- max(total_df$"Utländska.procent")
+highest.moppar <- max(total_df$"MopparPer100Personer")
+highest.population <-max(total_df$Befolkning)
+highest.all <- c(highest.age, highest.inkomst, highest.utland, highest.moppar, highest.population)
+```
+```{r tabl2.combine, echo=FALSE}
+names_table2 <- c("Medelålder", "Medelinkomst", "Utländska", "Moppar", "Befolkning")
+list_table2 <- list(" "=names_table2,Medelvärde=medel.all, Median=median.all
+                    , Standardavikelse=standardavikelse.all, Minumum=lowest.all,
+                    Maximum=highest.all)
+table2_dataframe<- data.frame(list_table2)
+knitr::kable(table2_dataframe,caption = "Test",digits = 3, format.args = list(big.mark = ",",
+  scientific = FALSE))
+```
 # Tidsseriedata
 ```{r kpiPlot, echo=FALSE}
 
