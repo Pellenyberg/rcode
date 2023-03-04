@@ -14,7 +14,7 @@ output:
 
 # Introduktion
 
-I detta arbete har vi använt oss utav tidsseriedata som hämtats från SCB. 
+I detta arbete hard vi använt oss utav tidsseriedata som hämtats från SCB. 
 Den datan vi valt att hämta är konsumentprisindex (KPI) på riksnivå i Sverige.
 Tidsserien är på månadsnivå och innefattar perioden january 2012 till 
 december 2021. Den innefattar en period om tio år och totalt 120 månader. Dessa
