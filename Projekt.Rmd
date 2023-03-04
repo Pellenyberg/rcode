@@ -153,7 +153,9 @@ knitr::kable(total_df[150:154,], caption="Tabell för kommundata")
 
 En tabell över olika data på kommunnivå hämtat från SCBs hemsida. Där vi i denna
 tabell väljer att presentera data för sex av de totalt 290 kommuners data. 
-I denna tabell har vi data för medelålder, medellön på årsbasis, 
+I denna tabell har vi data för medelålder, medellön på årsbasis, andel utländska, antal moppar per 100 personer samt antalet invånare.
+
+
 ```{r medel, echo=FALSE}
 medel.age <- mean(total_df$Medelålder)
 medel.utland <- mean(total_df$"Utländska.procent")
@@ -203,6 +205,39 @@ table2_dataframe<- data.frame(list_table2)
 knitr::kable(table2_dataframe,caption = "Test",digits = 3, format.args = list(big.mark = ",",
   scientific = FALSE))
 ```
+```{r plot, echo=FALSE}
+plot(px_data_frame_income$Medelvärde, 
+     100*iTrafik$`Fordon i trafik`/px_data_frame_befolkning$Folkmängd,
+     main="Scatterplot inkomst och moppar",
+     xlab="Medelinkomst i tkr",
+     ylab="Moppar per 100 pers",
+     xlim=c(400, 1050))
+
+```
+
+
+En scatter plot mellan variablerna medelinkomst och antal moppar per 100 personer.
+Det tycks inte föreligga någon signifikant korrelation mellan variablerna. 
+Kommunen Danderyd utslöts ur plotten då dess medelinkomst låg nästan det dubbla 
+av kommunen med näst högst inkomst.
+
+```{r age.plot, echo=FALSE}
+
+hist(result_age, main="Medelålder", ylab="Frekvens", xlab="Ålder", breaks=40)
+
+```
+
+```{r income.hist, echo=FALSE}
+
+hist(px_data_frame_income$`Medelvärde,  tkr`, xlim =c(300, 1050), breaks=30, main="Medelinkomst för kommuner", xlab="Inkomst", ylab="Frekvens")
+
+```
+
+Data på medelinkomst för alla kommuner. 
+Även här valt att exkludera Danderyd som annars ger ett fult histogram.
+
+
+
 # Tidsseriedata
 ```{r kpiPlot, echo=FALSE}
 
