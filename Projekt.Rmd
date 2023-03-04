@@ -14,11 +14,6 @@ output:
 
 # Introduktion
 
-<<<<<<< Updated upstream
-I detta arbete har vi använt oss utav tidsseriedata som hämtats från SCB. 
-=======
-I detta arbete hardvi använt oss utav tidsseriedata som hämtats från SCB. 
->>>>>>> Stashed changes
 Den datan vi valt att hämta är konsumentprisindex (KPI) på riksnivå i Sverige.
 Tidsserien är på månadsnivå och innefattar perioden january 2012 till 
 december 2021. Den innefattar en period om tio år och totalt 120 månader. Dessa
@@ -236,7 +231,15 @@ hist(px_data_frame_income$`Medelvärde,  tkr`, xlim =c(300, 1050), breaks=30, ma
 Data på medelinkomst för alla kommuner. 
 Även här valt att exkludera Danderyd som annars ger ett fult histogram.
 
+```{r box, echo=FALSE}
 
+boxplot(100*iTrafik$`Fordon i trafik`/px_data_frame_befolkning$Folkmängd, horizontal = TRUE, main="Boxplot andel moppar per 100 invånare", col="blue", outline=FALSE, xlab="Moppar per 100")
+
+```
+
+Ovan illustreras en boxplot på andel moppar i kommunerna per 100 invånare. Vi
+finner här en median strax över 1 moped per 100 invånare. I boxplotten har vi
+tagit beslutet att ignorera outliers då detta annars starkt förvränger figuren.
 
 # Tidsseriedata
 ```{r kpiPlot, echo=FALSE}
