@@ -152,7 +152,7 @@ knitr::kable(total_df[150:154,], caption="Tabell över variabler", digits = 3, f
 ```
 
 
-I denna tabell har vi data för medelålder, medellön på årsbasis(tkr), antal utlandsfödda per 100 invånare, antal moppar per 100 invånare samt antalet invånare. Våra kommuner vi har användt oss av står i kolumnen "Kommun". Varje rad representerar en kommun
+I denna tabell har vi data för medelålder, medellön på årsbasis(tkr), antal utlandsfödda per 100 invånare, antal moppar per 100 invånare samt antalet invånare. Våra kommuner vi har användt oss av står i kolumnen "Kommun". Varje rad representerar en kommun.
 
 
 ```{r medel, echo=FALSE}
@@ -208,7 +208,7 @@ knitr::kable(table2_dataframe,caption = "Tabell över statistiska mått",digits 
 Ovan visar en tabell våra 4 variabler samt befolknings-variabeln.
 Tabllen visar dessa varibler samt vad medelvärdet,medianen, standardavikelsen,
 minsta och största obeservationen av samtliga variabler. 
-I denna tabell till skillnad från den ovanför så är representerar variablerna Sveriges samtliga regioner, inte enbart våra utvalda kommuner
+I denna tabell till skillnad från den ovanför så är representerar variablerna Sveriges samtliga regioner, inte enbart våra utvalda kommuner.
 
 ```{r histo.lines, echo=FALSE, warning=FALSE, message=FALSE}
 age.hist <- ggplot(data=px_data_frame_age) + aes(x=px_data_frame_age$`Befolkningens medelålder`)
@@ -224,7 +224,7 @@ age.hist <- ggplot(data=px_data_frame_age) + aes(x=px_data_frame_age$`Befolkning
 
 Detta histogram representerar medelålder för de olika kommunernas befolkning.
 Vi har röda vertikala linjer som representerar första och tredje kvartil, samt 
-medianen. Det som kan sägas om datan är att det är någorlunda normalfördelat.
+medianen. Det som kan sägas om datan är att den är någorlunda normalfördelad.
 
 
 
