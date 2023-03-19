@@ -210,6 +210,21 @@ Tabllen visar dessa varibler samt vad medelvärdet,medianen, standardavikelsen,
 minsta och största obeservationen av samtliga variabler. 
 I denna tabell till skillnad från den ovanför så är representerar variablerna Sveriges samtliga regioner, inte enbart våra utvalda kommuner.
 
+```{r inkomstbarplot, echo=FALSE,warning=FALSE}
+AverageIncomePerHouse <- px_data_frame_income$Medelvärde[-1]
+inkomstIntervall <- cut(AverageIncomePerHouse,breaks = c(360,380,400,420,440,460,480,500,520,540,560,580,600,Inf),
+                     labels = c("360:380","380:400","400:420","420:440",
+                                "440:460","460:480","480:500","500:520",
+                                "520:540","540:560","560:580","580:600","600+"))
+ggplot(data=total_df, aes(x = inkomstIntervall)) +
+                                     geom_bar(aes(y = after_stat(count)/sum(after_stat(count))),fill="steelblue") + 
+                                     scale_y_continuous(labels=scales::percent) + ylab("Relativ frekvens") +
+                                     xlab("Medelinkomst i tkr/år") + ggtitle("Barplot medelinkomst")
+
+```
+Detta är en barplot över medelinkomsten(tkr)/år, med relativ frekvens på y-axeln och medelinkomst/år som en kategorisk variabel på x-axel
+Barplotten för medelinkomsten är ej centrerad runt det nationella medelvärdet för medelinkomsten vilket är 498,314tkr. Anledningen till detta kan vara att observationerna med en medelinkomst>600 tkr/år ökar det nationella medelvärdet. Detta trots att denna grupp har en betydligt mindre relativ frekvens än (400:480)
+
 ```{r histo.lines, echo=FALSE, warning=FALSE, message=FALSE}
 age.hist <- ggplot(data=px_data_frame_age) + aes(x=px_data_frame_age$`Befolkningens medelålder`)
 (age.hist + 
@@ -264,6 +279,76 @@ kable(cor.df, align = "l", row.names = TRUE, style="html", caption="Tabell för 
  
 <br/>
 Vidare har vi en undersökning av korrelation mellan variablerna utlandsfödda och medelinkomster. Datan presenteras i tabell samt även en utskrift från testet. Från testet så kan det klargöras att korrelationen inte är 0. Den är däremot väldigt svag så svårt att säga även här om det finns en korrelation. Vi har i testet utgått från en nollhypotes att korrelation är lika med 0 och en alternativhypotes att korrelationen inte är 0. Detta test är gjort med en 5% signifikansnivå. Och då vi får ett p-värde som är större än detta. 0.2324>0.05. Så accepterar vi nollhypotesen att korrelationen är 0. Det 95% konfidensintervall för detta test ligger på -0.04356668 - 0.1775023.
+
+```{r kategoriskaVariabler, echo=FALSE,warning=FALSE}
+andelUtland <- total_df$"Utlandsfödda"
+utlandsIntervall <- cut(andelUtland, breaks = c(0,10,20,30,Inf),
+                        labels = c("<10","10:20","20:30",">30"))
+
+medelalder <- total_df$Medelålder
+medelalderIntervall <- cut(medelalder, breaks = c(0,40,45,50,Inf), 
+                           labels = c("<40","40:45","45:50",">50"))
+Utlandsfödda <- utlandsIntervall
+Mopeder <- total_df$"Mopeder"
+
+
+```
+Våra kategoriska variabler är “Utlandsfödda” och “Medelålder”.
+
+**Utlandsfödda** 
+Antal utlandsfödda/100 personer och är kategoriserad i intervallen: x<10, 10<x<20, 20<x<30, 30<x.
+
+**Medelålder**
+Kategoriserad i intervallen: x<40år, 40år<x<45 år, 45 år<x<50 år, 50 år<x
+                                                                          
+```{r dataframe6, echo=FALSE,warning=FALSE,message=FALSE}
+df6a <- data.frame(AverageIncomePerHouse, andelUtland)
+df6c <- data.frame(Utlandsfödda, medelalderIntervall)
+df6d <- data.frame(Mopeder,AverageIncomePerHouse,Utlandsfödda)
+```
+
+```{r Scatterplot6a ,echo=FALSE,warning=FALSE,message=FALSE}
+a6<-ggplot(data = df6a,aes(x=AverageIncomePerHouse,y=medelalder))+
+  geom_point(aes(color=Utlandsfödda)) + ylab("Medelålder") + xlab("Medelinkomst(tkr)")+ggtitle("Scatterplot Medelinkomst/Medelålder")
+a6
+```
+
+Detta är en scatterplot mellan medelinkomst och medelålder där antal utlandsfödda/100 personer agerar som en kategorisk variabel. I plotten kan vi möjligtvis urskilja en koppling mellan antalet utlandsfödda och medelåldern. I flera kommuner där medelåldern<40 år så är utlandsfödda /100 personer>30 personer. 
+
+```{r Histogram.Medelinkomst, echo=FALSE,warning=FALSE,message=FALSE}
+b6 <- ggplot(data = df6a, aes(x=AverageIncomePerHouse)) +
+  geom_histogram(aes(fill=Utlandsfödda)) + scale_x_continuous(limits = c(350,1050)) + xlab("Medelinkomst(tkr)")+
+  ylab("Antal") + ggtitle("Histogram Medelinkomst")
+b6 
+
+```
+
+Detta är ett histogram över medelinkomsten där antal utlandsfödda återigen agerar som kategorisk variabel. I denna plott så har vi även valt att eliminera kommunen “Danderyd” eftersom deras medelinkomst ligger så pass långt ifrån övriga vilket resulterar i en ful graf. Det går inte direkt att urskilja någon koppling mellan medelinkomst och antal utlandsfödda.
+
+
+```{r Grupperad.barplot, echo=FALSE,warning=FALSE,message=FALSE}
+c6 <- ggplot(data = df6c, aes(x=medelalderIntervall, fill = Utlandsfödda)) +
+  geom_bar(position = "dodge") + xlab("Medelålder") + ylab("Antal") + ggtitle("Grupperad barplot Medelålder")
+c6
+
+```
+
+Detta är en grupperad barplot med våra två kategoriska variabler (medelålder, utlandsfödda). Återigen kan vi se en koppling mellan antal utlandsfödda och medelåldern. Det är nämligen endast i de kommuner som har en medelålder<40 år som den turkosa(20st<x<30st) och lila stapeln(30st<x) summerar upp till ett större antal än den gröna stapeln(10<x<20).
+
+```{r Scatter.facet_wrap, echo=FALSE,warning=FALSE,message=FALSE}
+
+d6 <- ggplot(data = df6d, mapping= aes(x=AverageIncomePerHouse, y=Mopeder)) + 
+  geom_point(size=1) + scale_x_continuous(limits = c(0,1050)) + scale_y_continuous(limits = c(0,25)) + 
+  xlab("Medelinkomst(tkr)") + ylab("Antal Mopeder/100 personer") + 
+  ggtitle("Scatterplot Medelinkomst/(Antal Mopeder/100) personer")
+
+d6 +facet_wrap(~Utlandsfödda)
+
+```
+
+Detta är 4 scatterplot mellan antalet mopeder/100 personer och medelinkomsten som är uppdelad efter våran kategoriska variabel “Utlandsfödda”. Vi har återigen eliminerat danderyd eftersom dess medelinkomst påverkar utseendet av våra plottar så mycket. Vi har även valt att eliminera kommunerna: Salem, Vingåker och Tyresö från denna plot eftersom antalet mopeder per 100 personer ligger så pass långt resten av observationerna. 
+Det går möjligtvis att urskilja ett visst samband mellan medelinkomsten och antalet utlandsfödda. I de kommuner där antalet utlandsfödda är större tycks även medelinkomsten vara högre än där antalet utlandsfödda är lägre.
+
 
 # Datanalys av tidsseriedata
 
