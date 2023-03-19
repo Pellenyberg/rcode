@@ -304,7 +304,7 @@ kable(month_means, row.names = F, format = "html", table.attr = "style='width:30
 
 
 ```
-
+<br/>
 Tabell för medelvärden månadsvis för KPI. Perioden 2012-2021.
 
 
@@ -315,7 +315,8 @@ plot.means +  geom_line(color="blue", lwd=1.5) + labs(y="KPI")
 
 ```
 
-En plot för medelvärden för KPI. Med olika månaders medelvärden på X-axeln. Perioden 2012-2021
+En plot för medelvärden för KPI. Med olika månaders medelvärden på X-axeln. Perioden 2012-2021. Det som går att utläsa från detta samt från tabellen är det faktum
+att medelvärdet är som lägst i januari och högst i december månad. 
 
 
 
@@ -334,7 +335,8 @@ ggplot(data = years.df, aes(x = years, y = years.df$`KPI, fastställda tal`)) +
 
 ```
 
-Boxplots för åren 2012-2021. Med månadsdata january till februari för varje år.
+Boxplots för åren 2012-2021. Med månadsdata january till februari för varje år. Man ser här 
+väldigt tydligt att KPI ökar över tid. Och det tycks vara så att intervallet för KPI varje år ökat. 
 
 ```{r z.plot, echo=FALSE, warning=FALSE}
 month_means_sub <- rep(c(month_means$`Medel KPI`), times=10)
@@ -350,7 +352,8 @@ plot.z.tid + geom_line(aes(y=Y), color="red")
 ```
 
 Linjeplot för jämförelse av KPI där månadsvariation tagits bort, Z (blå linje) mot 
-KPI som inte har justerats, Y (röd linje).
+KPI som inte har justerats, Y (röd linje). De tycks följa en någorlunda liknande trend. 
+Inga större skillnader här. 
 
 
 
@@ -360,7 +363,7 @@ ggplot(data=px_data_frame,
                  aes(x=datum, y=px_data_frame$`KPI, fastställda tal`)) + geom_line(color="blue") + geom_smooth(method="lm") + ylab("KPI")
 
 ```
-
+Linjeplot för KPI under hela intervallet 2012-2021. Denna plot med en regressionslinje som tydligt har positiv lutning. KPI ökar alltså över tid. 
 
 # Slutsats av tidsseriedata
-KPI ökar över tiden. Detta förklarar sig självt av en generellt konstant positiv inflation. Det kan eventuellt föreligga någon typ av säsongsvariation med det högsta medelvärdet för KPI förekommer i december månad. Och lägsta förekommer i januari. Detta skulle givetvis också enkelt nog kunna förklaras av det faktum att januari är den första månaden varje år och december sista. Med en positiv inflation så kommer det ganska självklart innebära högre KPI i genomsnitt mot slutet av året.
+KPI ökar över tiden. Detta förklarar sig självt av en generellt konstant positiv inflation. Det kan eventuellt föreligga någon typ av säsongsvariation. Detta då det högsta medelvärdet för KPI förekommer i december månad. Och lägsta förekommer i januari. Detta skulle givetvis också enkelt nog kunna förklaras av det faktum att januari är den första månaden varje år och december sista. Med en positiv inflation så kommer det ganska självklart innebära högre KPI i genomsnitt mot slutet av året. 
