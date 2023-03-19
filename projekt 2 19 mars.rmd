@@ -293,6 +293,7 @@ Y.plot
 
 En tidsserie över perioden 1 januari 2012 till 31 december 2021. Där data hämtas från SCB och perioden har justerats så att basåret är 2012.
 
+<br/>
 ```{r means, echo=FALSE, warning=FALSE}
 gruppera <- list(rep(c("Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"), times=10))
 month.average <- aggregate(x=px_data_frame, by=gruppera, FUN=mean)
@@ -311,14 +312,14 @@ Tabell för medelvärden månadsvis för KPI. Perioden 2012-2021.
 
 ```{r means.plot, echo=FALSE, warning=FALSE}
 plot.means <- ggplot(data=month_means, aes(y=month_means$`Medel KPI`, x=Månad, group=1))
-plot.means +  geom_line(color="blue", lwd=1.5) + labs(y="KPI")
+plot.means +  geom_line(color="blue", lwd=1.5) + labs(y="KPI") + ggtitle("Plot för månadsmedelvärden")
 
 ```
 
 En plot för medelvärden för KPI. Med olika månaders medelvärden på X-axeln. Perioden 2012-2021. Det som går att utläsa från detta samt från tabellen är det faktum
 att medelvärdet är som lägst i januari och högst i december månad. 
 
-
+<br/>
 
 ```{r boxplot.year, echo=FALSE, warning=FALSE}
 years.df <- px_data_frame
@@ -338,6 +339,8 @@ ggplot(data = years.df, aes(x = years, y = years.df$`KPI, fastställda tal`)) +
 Boxplots för åren 2012-2021. Med månadsdata january till februari för varje år. Man ser här 
 väldigt tydligt att KPI ökar över tid. Och det tycks vara så att intervallet för KPI varje år ökat. 
 
+<br/>
+
 ```{r z.plot, echo=FALSE, warning=FALSE}
 month_means_sub <- rep(c(month_means$`Medel KPI`), times=10)
 Z <- Y - month_means_sub
@@ -346,7 +349,7 @@ z.tid.df <- data.frame(Z, minaDatum)
 colnames(z.tid.df) <- c("KPI", "Tid")
 plot.z.tid <- ggplot(data=z.tid.df, 
                  aes(x=Tid, y=KPI)) + geom_line(color="blue")
-plot.z.tid + geom_line(aes(y=Y), color="red")
+plot.z.tid + geom_line(aes(y=Y), color="red") + ggtitle("Plot för jämförelse av KPI utan månadsvartion (blå) mot icke justerad KPI (röd)")
   
 
 ```
@@ -356,13 +359,14 @@ KPI som inte har justerats, Y (röd linje). De tycks följa en någorlunda likna
 Inga större skillnader här. 
 
 
-
+<br/>
 
 ```{r smooth.plot, echo=FALSE, warning=FALSE, message=FALSE}
 ggplot(data=px_data_frame, 
-                 aes(x=datum, y=px_data_frame$`KPI, fastställda tal`)) + geom_line(color="blue") + geom_smooth(method="lm") + ylab("KPI")
+                 aes(x=datum, y=px_data_frame$`KPI, fastställda tal`)) + geom_line(color="blue") + geom_smooth(method="lm") + ylab("KPI") + ggtitle("Linjeplot med regressionslinje för KPI. 2012-2021")
 
 ```
+
 Linjeplot för KPI under hela intervallet 2012-2021. Denna plot med en regressionslinje som tydligt har positiv lutning. KPI ökar alltså över tid. 
 
 # Slutsats av tidsseriedata
