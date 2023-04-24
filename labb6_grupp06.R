@@ -76,19 +76,19 @@ print.classroom <- function(x) {
 
 
 
-#' @title uppgift2 (give_blood)
+#' @title give_blood()
 #'
 #' @description 
 #' Funktionen ger baserat på argumenten den tidigaste vardagen som personen 
 #' kan ge blod.
 #'
-#' @param arg1 Senaste gången blodgivaren gav blod. Default är idag (today())
+#' @param lasttime Senaste gången blodgivaren gav blod. Default är idag (today())
 #' 
-#' @param arg2 Interval-objekt för utlandsresa. Default är "hemma".
+#' @param holiday Interval-objekt för utlandsresa. Default är "hemma".
 #' 
-#' @param arg3 Kön på personen man=m, kvinna=f
+#' @param sex Kön på personen man=m, kvinna=f
 #' 
-#' @param arg4 Om personen varit i land där det finns malaria. 
+#' @param type_of_travel Om personen varit i land där det finns malaria. 
 #' "malaria" indikerar att personen varit i malarialand. Annars "other"
 #' 
 #' 
