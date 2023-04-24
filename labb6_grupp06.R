@@ -35,34 +35,42 @@ Grupp<-"grupp06"
 
 
 classroom <- function(seats , whiteboards) {
+  # Kollar efter felaktig input
   if (seats <  1)  stop ("Ett klassrum ska inte ha mindre än 1 stol")
   if (whiteboards <  0) {
     stop ("Ett klassrum kan ju inte ha mindre än 0 whiteboards")
   }
+  # skapar en lista med inpu-informationen
   classroomInfo <- list(seats = seats,whiteboards = whiteboards)
+  # tillskriver listan classroomInfo klassen "classroom"
   class(classroomInfo) <- "classroom"
   return(classroomInfo)
 }
 
-
+# Skapar en generisk funktion för objekt av klassen "classroom"
 print.classroom <- function(x) {
-  
+  # Kollar om salen är ett grupprum samt antalet whiteboards
   if (x$seats[1] <=10 && x$whiteboards[1] == 0 ) {
     cat("A group room for", x$seats[1], "students with no whiteboards")
   } else if (x$seats[1] <=10) {
     cat("A group room for", x$seats[1], "students with", x$whiteboards[1], "whiteboards")
-  } 
+  }
+  # Kollar om salen är ett klassrum samt antalet whiteboards
   if ((x$seats[1] < 51 && x$seats[1] > 10) && x$whiteboards[1] == 0) {
     cat("A classroom for", x$seats[1], "students with no whiteboards")
   } else if (x$seats[1] < 51 && x$seats[1] > 10) {
     cat("A classroom for", x$seats[1], "students with", x$whiteboards[1], "whiteboards")
   } 
+  # Kollar om salen är en föreläsningssal samt antalet whiteboards
   if (x$seats[1] > 50 && x$whiteboards[1] == 0) {
     cat("A lecture hall for", x$seats[1], "students with no whiteboards")
   } else if (x$seats[1] > 50) {
     cat("A lecture hall for", x$seats[1], "students with", x$whiteboards[1], "whiteboards")
   }
+  # radbrytning
   cat("\n")
+  # Printar ut "orginalet"(ej säker på om detta ska vara med eller om det har 
+  # råkat följa med i sista utkastet)
   print.default(x)
 }
 
